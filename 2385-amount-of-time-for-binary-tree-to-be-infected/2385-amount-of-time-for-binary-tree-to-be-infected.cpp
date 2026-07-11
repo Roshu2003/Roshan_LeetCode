@@ -11,43 +11,30 @@
  */
 class Solution {
 public:
+    int st;
+    int ans = 0;
+    int solve(TreeNode* node){
+        if(!node)return 0;
+
+        int lh = solve(node->left);
+        int rh = solve(node->right);
+        if(node->val == st){
+            ans = max(lh,rh);
+            return -1;
+        }
+        else if(lh >= 0 && rh >= 0){
+            return max(rh,lh) + 1;
+        }
+        else{
+            int d = abs(rh) + abs(lh);
+            ans = max(ans,d);
+            return min(rh,lh) - 1;
+        }
+        return 0;
+    }
     int amountOfTime(TreeNode* root, int start) {
-        unordered_map<int,vector<int>> adj;
-        queue<TreeNode*> q;
-        q.push(root);
-        while(!q.empty()){
-            auto node = q.front();
-            q.pop();
-            if(node->left){
-                adj[node->val].push_back(node->left->val);
-                adj[node->left->val].push_back(node->val);
-                q.push(node->left);
-            }
-            if(node->right){
-                adj[node->val].push_back(node->right->val);
-                adj[node->right->val].push_back(node->val);
-                q.push(node->right);
-            }
-        }
-        int ans = 0;
-        queue<int> pq;
-        pq.push(start);
-        unordered_set<int> vis;
-        vis.insert(start);
-        while(!pq.empty()){
-            int sz = pq.size();
-            while(sz--){
-                auto node = pq.front();
-                pq.pop();
-                for(auto it : adj[node]){
-                    if(!vis.count(it)){
-                        vis.insert(it);
-                        pq.push(it);
-                    }
-                }
-            }
-            ans++;
-        }
-        return ans - 1;
+        st = start;
+        solve(root);
+        return ans;
     }
 };
