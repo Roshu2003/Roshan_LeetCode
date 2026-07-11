@@ -28,9 +28,7 @@ public:
         for (int i = 0; i < n; i++) {
             if (!vis[i]) {
                 auto [cnt,ed] = dfs(i, vis, adj);
-                // cout<<cnt<<" "<<ed<<endl;
-                ed /= 2;
-                if (cnt * (cnt - 1) == 2 * ed)
+                if (cnt * (cnt - 1) ==  ed)
                     ans++;
             }
         }
