@@ -1,28 +1,31 @@
 class Solution {
 public:
-    vector<vector<int>> shiftGrid(vector<vector<int>>& nums, int k) {
-        queue<int> q;
-        int n = nums.size();
-        int m = nums[0].size();
+    vector<vector<int>> shiftGrid(vector<vector<int>>& grid, int k) {
+        int m = grid.size();
+        int n = grid[0].size();
 
-        k %= (n * m);
-        int idx = (n * m) - k;
+        int total = m * n;
+        k %= total;
 
-        for (int t = 0; t < k; t++) {
-            int i = idx / m;
-            int j = idx % m;
-            q.push(nums[i][j]);
-            idx++;
-        }
+        vector<vector<int>> ans(m, vector<int>(n));
 
-        for (int i = 0; i < n; i++) {
-            for (int j = 0; j < m; j++) {
-                q.push(nums[i][j]);
-                nums[i][j] = q.front();
-                q.pop();
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+
+                // index in 1D array (before rotation)
+                int oldIndex = i * n + j;
+
+                // index in 1D array (after rotation)
+                int newIndex = (oldIndex + k) % total;
+
+                // changing from 1d back to 2D
+                int newRow = newIndex / n;
+                int newCol = newIndex % n;
+
+                ans[newRow][newCol] = grid[i][j];
             }
         }
 
-        return nums;
+        return ans;
     }
 };
