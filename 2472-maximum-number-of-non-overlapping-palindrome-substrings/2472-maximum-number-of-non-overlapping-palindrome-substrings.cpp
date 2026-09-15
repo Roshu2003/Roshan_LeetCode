@@ -51,7 +51,19 @@ public:
                 }
             }
         }
-        memset(dp,-1,sizeof(dp));
-        return solve(0,k - 1);
+        // memset(dp,-1,sizeof(dp));
+        // return solve(0,k - 1);
+        int ans = 0;
+        for(int i  = 0; i + k <= n; i++){
+            if(isPalindrom[i][i + k - 1]){
+                ans++;
+                i += k - 1;
+            }
+            else if(i + k < n && isPalindrom[i][i + k]){
+                ans++;
+                i += k;
+            }
+        }
+        return ans;
     }
 };
