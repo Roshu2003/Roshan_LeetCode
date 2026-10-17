@@ -1,20 +1,22 @@
 class Solution {
 public:
     vector<int> maxProductPair(vector<int>& nums, int target) {
-        vector<int> ans = {-1,-1};
+        vector<int> ans = {-1, -1};
         int maxP = INT_MIN;
         int n = nums.size();
-        for(int i = 0; i < n; i++){
-            for(int j = 0; j < n; j++){
-                if(i == j)continue;
-                if(nums[i] + nums[j] == target && nums[i] > nums[j]){
-                    if(nums[i] * nums[j] > maxP){
-                        maxP = nums[i] * nums[j];
-                        ans = {i,j};
-                    }
+        map<int, int> mp;
+        for (int i = 0; i < n; i++) {
+            int x = target - nums[i];
+            if (mp.count(x)) {
+                int y = nums[i];
+                if (x != y && y * x > maxP) {
+                    maxP = x * y;
+                    if(x > y) ans = {mp[x],i};
+                    else ans = {i,mp[x]};
                 }
             }
+            mp[nums[i]] = i;
         }
-        return  ans;
+        return ans;
     }
 };
