@@ -1,22 +1,23 @@
 class Solution {
 public:
-    vector<vector<int>> dp;
+    vector<int> dp;
 
-    int solve(int i, int sum) {
-        if (sum == 0) return 0;
-        if (i * i > sum) return 1e9;
+    int solve(int sum) {
+        if(sum == 0) return 0;
 
-        int &ans = dp[i][sum];
-        if (ans != -1) return ans;
+        if(dp[sum] != -1) return dp[sum];
 
-        int take = 1 + solve(i, sum - i * i);
-        int nottake = solve(i + 1, sum);
+        int ans = INT_MAX;
 
-        return ans = min(take, nottake);
+        for(int i = 1; i * i <= sum; i++) {
+            ans = min(ans, 1 + solve(sum - i * i));
+        }
+
+        return dp[sum] = ans;
     }
 
     int numSquares(int n) {
-        dp.assign(sqrt(n) + 2, vector<int>(n + 1, -1));
-        return solve(1, n);
+        dp.assign(n + 1, -1);
+        return solve(n);
     }
 };
