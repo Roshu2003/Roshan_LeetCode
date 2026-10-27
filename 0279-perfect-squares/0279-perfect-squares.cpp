@@ -14,7 +14,7 @@ public:
         }
 
         return dp[sum] = ans;
-    }
+    } // O(nsqrt(n))
 
     int numSquares(int n) {
         dp.assign(n + 1, -1);
