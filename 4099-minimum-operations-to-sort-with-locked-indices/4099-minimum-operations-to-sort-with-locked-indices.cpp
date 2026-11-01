@@ -7,11 +7,12 @@ public:
         for(int i = 0; i < n; i++){
             mx = max(mx,nums[i]);
             if(locked[i] == 1){
-                if(!(nums[i] == i + 1 && mx == i + 1))ans++;
+                if(nums[i] == i + 1 && mx == i + 1)continue;
+                ans++;
             }
         }
         if(ans > k)return -1;
-        for(int i = 0; i < n; i++){
+        for(int i = 0; i < n; i++){//Inversions Count
             for(int j = i + 1; j < n; j++){
                 if(nums[i] > nums[j])ans++;
             }
