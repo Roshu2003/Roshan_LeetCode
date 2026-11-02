@@ -1,15 +1,21 @@
 class Solution {
 public:
     int minMoves2(vector<int>& nums) {
-        long long ans = INT_MAX;
+        long long ans = 0;
         int n = nums.size();
-        for(int i = 0; i < n; i++){
-            long long sum = 0;
-            for(int j = 0; j < n; j++){
-                sum += abs(nums[i] - nums[j]);
-            }
-            ans = min(ans,sum);
+        sort(nums.begin(),nums.end());
+        int mid = n / 2;
+        long long temp = nums[mid];
+        for(auto x : nums){
+            ans += abs(x - temp);
         }
         return ans;
     }
 };
+/*
+    sum = 22
+    1 -> 4 -> (21 - 4) = 17
+    10 -> 40 -> (12 - 40) = 28
+    2 -> 8 -> (20 - 8) = 12
+
+*/
