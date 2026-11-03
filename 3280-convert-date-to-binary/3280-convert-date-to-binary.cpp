@@ -4,10 +4,9 @@ public:
         string s = "";
         while(n > 0){
             int x = (n % 2);
-            s += (x + '0');
+            s = to_string(x) + s;
             n /= 2;
         }
-        reverse(s.begin(),s.end());
         return s;
     }
     string convertDateToBinary(string s) {
