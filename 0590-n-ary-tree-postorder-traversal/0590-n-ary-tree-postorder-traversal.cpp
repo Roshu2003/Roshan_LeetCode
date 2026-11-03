@@ -25,13 +25,11 @@ public:
         if(!root)return;
         for(auto it : root->children){
             postOrder(it);
-            ans.push_back(it->val);
         }
+        ans.push_back(root->val);
     }
     vector<int> postorder(Node* root) {
         postOrder(root);
-        if(root)
-            ans.push_back(root->val);
         return ans;
     }
 };
