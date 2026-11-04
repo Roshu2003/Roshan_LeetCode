@@ -1,16 +1,15 @@
 class Solution {
 public:
     bool checkIfExist(vector<int>& arr) {
-        map<int,int> mp;
-        for(auto it : arr)mp[it]++;
-        for(auto it : arr){
-            if(it == 0){
-                if(mp[it] > 1 && mp.count(it * 2))return true;
-            }
-            else{
-                if(mp.count(it * 2))return true;
-            }
+        unordered_set<int> seen;
+        for(auto num:arr)
+        {
+            if(seen.count(num*2) || (num%2==0 && (seen.count(num/2))))
+                return true;
+
+            seen.insert(num);
         }
-        return false;
+     return false;
+
     }
 };
