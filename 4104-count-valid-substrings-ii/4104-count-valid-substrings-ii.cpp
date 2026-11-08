@@ -13,19 +13,19 @@ public:
                 a = i;
             }
             else if (s[i] == 'b') {
-                if (a != -1) {
+                // if (a != -1) {
                     ab = a;
-                }
+                // }
             }
             else if (s[i] == 'c') {
-                if (ab != -1) {
+                // if (ab != -1) {
                     abc = ab;
-                }
+                // }
             }
 
-            if (abc != -1) {
+            // if (abc != -1) {
                 invalid += abc + 1;
-            }
+            // }
         }
 
         return total - invalid;
