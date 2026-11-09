@@ -8,7 +8,7 @@ SELECT
     l.total_copies AS current_borrowers
 FROM library_books l
 Join borrowing_records b
-USING (book_id)
+on l.book_id = b.book_id
 where b.return_date is NUll
 group by l.book_id
 having count(*) = l.total_copies
