@@ -1,14 +1,21 @@
 class Solution {
 public:
     int minimumLengthEncoding(vector<string>& words) {
-        set<string> st(words.begin(),words.end());
-        for(auto it : words){
-            for(int k  = 1; k < it.size(); k++){
-                st.erase(it.substr(k));
+        int n = words.size();
+        for(string& w : words){
+            reverse(w.begin(),w.end());
+        }
+        sort(words.begin(),words.end(),[](const string& a, const string& b){
+            return a < b;
+        });
+        int res = 0;
+        for(int i = 0;i<n;i++){
+            if(i+1<n && words[i+1].substr(0,words[i].size()) == words[i]){
+                continue;
+            }else{
+                res += words[i].size() + 1;
             }
         }
-        int ans = 0;
-        for(auto it : st)ans += it.size() + 1;
-        return ans;
+        return res;
     }
 };
