@@ -1,6 +1,8 @@
 class Solution {
 public:
     long long maxStrength(vector<int>& nums) {
+        int n = nums.size();
+        if(n == 1)return nums[0];
         long long ans = 0;
         int cnt = 0;
         int zero = 0;
@@ -21,11 +23,9 @@ public:
                 mx = max(mx, nums[i]);
             }
         }
-        int n = nums.size();
+        // int n = nums.size();
         if(cnt == 1){
-            if( zero > 0 && zero == n - 1)return 0;
-            if(n == 1)
-            return ans;
+            if(zero > 0 && zero == n - 1)return 0;
             return ans / mx;
         }
         if(cnt % 2 == 1)
