@@ -6,23 +6,24 @@
  *     TreeNode *right;
  *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
  *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
- *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+ *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left),
+ * right(right) {}
  * };
  */
 class Solution {
 public:
-    int ans = 0;
-    void solve(TreeNode* root,int sum){
-        if(!root)return;
-        if(!root->left && !root->right){
-            ans += sum * 10 + root->val;
-            return;
-        }
-        solve(root->left,sum * 10 + root->val);
-        solve(root->right,sum * 10 + root->val);
+    int solve(TreeNode* root, int sum) {
+        if (!root)
+            return 0;
+
+        sum = sum * 10 + root->val;
+
+        if (!root->left && !root->right)
+            return sum;
+
+        return solve(root->left, sum) + solve(root->right, sum);
     }
     int sumNumbers(TreeNode* root) {
-        solve(root,0);
-        return ans;
+       return solve(root, 0);
     }
 };
