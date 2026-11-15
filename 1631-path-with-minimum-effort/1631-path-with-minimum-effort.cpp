@@ -41,6 +41,7 @@ public:
             int i = pos.first;
             int j = pos.second;
             if(i == n - 1 && j == m - 1)return cost;
+            if(cost > dist[i][j])continue;
             int dx[] = {0,1,0,-1};
             int dy[] = {1,0,-1,0};
             for(int k = 0; k < 4; k++){
