@@ -15,3 +15,9 @@ public:
         return ans;
     }
 };
+/*
+Every subarray of length 2 is valid.
+For length 3 or more, validity is equivalent to pairwise coprimality.
+Use GCD with the window product to detect conflicts.
+Shrink the window from the left until the conflict disappears.
+*/
